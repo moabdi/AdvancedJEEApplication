@@ -1,5 +1,7 @@
 package com.moabdi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +24,19 @@ public class EmployeeController {
 	@Autowired
 	EmployeeManager empManager;
 	
-	@RequestMapping("/getAllEmployees")
-	public @ResponseBody String  getAllEmployees(){
-		
-		return "Hello ";
+	@RequestMapping("")
+	public @ResponseBody String  getIndexEmployees(){
+		return "Manage employees ";
 	}
 	
-	@RequestMapping("/getEmployeeByEmail")
-	public @ResponseBody String  getEmployeeById(@RequestParam("petId") String id){
-		return id;
+	@RequestMapping("/getAllEmployees")
+	public @ResponseBody List<EmployeeDTO>  getAllEmployees(){
+		return empManager.findAll();
+	}
+	
+	@RequestMapping("/getEmployeeById")
+	public @ResponseBody EmployeeDTO  getEmployeeById(@RequestParam("id") long id){
+		return empManager.findById(id); 
 	} 
 	
 	@RequestMapping("/getEmployee/{email}")
