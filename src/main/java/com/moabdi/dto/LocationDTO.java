@@ -10,7 +10,6 @@ import java.util.Set;
 public class LocationDTO implements java.io.Serializable {
 
 	private Integer locationId;
-	private CountryDTO countries;
 	private String streetAddress;
 	private String postalCode;
 	private String city;
@@ -22,21 +21,6 @@ public class LocationDTO implements java.io.Serializable {
 
 	public Integer getLocationId() {
 		return this.locationId;
-	}
-
-	/**
-	 * @return the countries
-	 */
-	public CountryDTO getCountries() {
-		return countries;
-	}
-
-	/**
-	 * @param countries
-	 *            the countries to set
-	 */
-	public void setCountries(CountryDTO countries) {
-		this.countries = countries;
 	}
 
 	/**

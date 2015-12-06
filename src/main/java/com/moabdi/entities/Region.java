@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +22,11 @@ public class Region implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int regionId;
+	
 	private String regionName;
-	private Set countrieses = new HashSet(0);
+	
+	@OneToMany(targetEntity=Country.class, mappedBy="countryId")
+	private Set countries = new HashSet(0);
 
 	public Region() {
 	}
@@ -34,7 +38,7 @@ public class Region implements java.io.Serializable {
 	public Region(int regionId, String regionName, Set countrieses) {
 		this.regionId = regionId;
 		this.regionName = regionName;
-		this.countrieses = countrieses;
+		this.countries = countrieses;
 	}
 
 	public int getRegionId() {
@@ -53,12 +57,12 @@ public class Region implements java.io.Serializable {
 		this.regionName = regionName;
 	}
 
-	public Set getCountrieses() {
-		return this.countrieses;
+	public Set getCountries() {
+		return this.countries;
 	}
 
-	public void setCountrieses(Set countrieses) {
-		this.countrieses = countrieses;
+	public void setCountries(Set countries) {
+		this.countries = countries;
 	}
 
 }

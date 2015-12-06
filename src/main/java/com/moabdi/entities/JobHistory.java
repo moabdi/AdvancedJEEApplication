@@ -1,68 +1,63 @@
 package com.moabdi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * 
  * @author Mostapha
  *
  */
-@Entity
-@Table(name = "job_history")
+//@Entity
+//@Table(name = "job_history")
 public class JobHistory implements java.io.Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private JobHistoryId id;
-	private Employee employees;
-	private Department departments;
-	private Job jobs;
+    @ManyToOne
+    @JoinColumn(name="employee_id", nullable=false)
+	private Employee employee;
+    
+    @ManyToOne
+    @JoinColumn(name="department_id", nullable=false)
+	private Department department;
+    
+    @ManyToOne
+    @JoinColumn(name="job_id", nullable=false)
+	private Job job;
 
+	@Column(name="start_date")
+	private Date startDate;
+
+	@Column(name="end_date")
+	private Date endDate;
+	
 	public JobHistory() {
 	}
 
-	public JobHistory(JobHistoryId id, Employee employees,
-			Department departments, Job jobs) {
-		this.id = id;
-		this.employees = employees;
-		this.departments = departments;
-		this.jobs = jobs;
+	public Employee getEmployee() {
+		return this.employee;
 	}
 
-	public JobHistoryId getId() {
-		return this.id;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
-	public void setId(JobHistoryId id) {
-		this.id = id;
+	public Department getDepartment() {
+		return this.department;
 	}
 
-	public Employee getEmployees() {
-		return this.employees;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
-	public void setEmployees(Employee employees) {
-		this.employees = employees;
+	public Job getJob() {
+		return this.job;
 	}
 
-	public Department getDepartments() {
-		return this.departments;
-	}
-
-	public void setDepartments(Department departments) {
-		this.departments = departments;
-	}
-
-	public Job getJobs() {
-		return this.jobs;
-	}
-
-	public void setJobs(Job jobs) {
-		this.jobs = jobs;
+	public void setJob(Job jobs) {
+		this.job = jobs;
 	}
 
 }

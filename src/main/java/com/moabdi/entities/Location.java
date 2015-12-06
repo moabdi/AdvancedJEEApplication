@@ -3,10 +3,14 @@ package com.moabdi.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,13 +23,27 @@ import javax.persistence.Table;
 public class Location implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="location_id")
 	private Integer locationId;
+	
+    @ManyToOne
+    @JoinColumn(name="country_id", nullable=false)
 	private Country countries;
+	
+	@Column(name="street_address")
 	private String streetAddress;
+	
+	@Column(name="postal_code")
 	private String postalCode;
+	
+	@Column(name="city")
 	private String city;
+	
+	@Column(name="state_province")
 	private String stateProvince;
-	private Set departmentses = new HashSet(0);
+	
+	@OneToMany(targetEntity=Department.class, mappedBy="departmentId")
+	private Set departments = new HashSet(0);
 
 	public Location() {
 	}
@@ -42,7 +60,7 @@ public class Location implements java.io.Serializable {
 		this.postalCode = postalCode;
 		this.city = city;
 		this.stateProvince = stateProvince;
-		this.departmentses = departmentses;
+		this.departments = departmentses;
 	}
 
 	public Integer getLocationId() {
@@ -93,12 +111,12 @@ public class Location implements java.io.Serializable {
 		this.stateProvince = stateProvince;
 	}
 
-	public Set getDepartmentses() {
-		return this.departmentses;
+	public Set getDepartments() {
+		return this.departments;
 	}
 
-	public void setDepartmentses(Set departmentses) {
-		this.departmentses = departmentses;
+	public void setDepartments(Set departmentses) {
+		this.departments = departmentses;
 	}
 
 }

@@ -11,7 +11,6 @@ import java.util.Set;
 public class CountryDTO implements java.io.Serializable {
 
 	private String countryId;
-	private RegionDTO regions;
 	private String countryName;
 	private Set locationses = new HashSet(0);
 
@@ -30,20 +29,6 @@ public class CountryDTO implements java.io.Serializable {
 	 */
 	public void setCountryId(String countryId) {
 		this.countryId = countryId;
-	}
-
-	/**
-	 * @return the regions
-	 */
-	public RegionDTO getRegions() {
-		return regions;
-	}
-
-	/**
-	 * @param regions the regions to set
-	 */
-	public void setRegions(RegionDTO regions) {
-		this.regions = regions;
 	}
 
 	/**

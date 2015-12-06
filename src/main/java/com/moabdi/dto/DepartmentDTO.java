@@ -13,10 +13,7 @@ import com.moabdi.dao.EmployeeDAO;
 public class DepartmentDTO implements java.io.Serializable {
 
 	private int departmentId;
-	private EmployeeDAO employees;
-	private LocationDTO locations;
 	private String departmentName;
-
 	private Set employeeses = new HashSet(0);
 	private Set jobHistories = new HashSet(0);
 
@@ -35,34 +32,6 @@ public class DepartmentDTO implements java.io.Serializable {
 	 */
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
-	}
-
-	/**
-	 * @return the employees
-	 */
-	public EmployeeDAO getEmployees() {
-		return employees;
-	}
-
-	/**
-	 * @param employees the employees to set
-	 */
-	public void setEmployees(EmployeeDAO employees) {
-		this.employees = employees;
-	}
-
-	/**
-	 * @return the locations
-	 */
-	public LocationDTO getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(LocationDTO locations) {
-		this.locations = locations;
 	}
 
 	/**

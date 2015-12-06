@@ -3,10 +3,12 @@ package com.moabdi.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,12 +22,23 @@ public class Job implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="job_id")
 	private String jobId;
+	
+	@Column(name="job_title")
 	private String jobTitle;
+	
+	@Column(name="min_salary")
 	private Integer minSalary;
+
+	@Column(name="max_salary")
 	private Integer maxSalary;
-	private Set employeeses = new HashSet(0);
-	private Set jobHistories = new HashSet(0);
+	
+	@OneToMany(targetEntity=Employee.class, mappedBy="employeeId")
+	private Set employees = new HashSet(0);
+	
+//	@OneToMany(targetEntity=JobHistory.class, mappedBy="job_history")
+//	private Set jobHistories = new HashSet(0);
 
 	public Job() {
 	}
@@ -35,13 +48,12 @@ public class Job implements java.io.Serializable {
 		this.jobTitle = jobTitle;
 	}
 
-	public Job(String jobId, String jobTitle, Integer minSalary, Integer maxSalary, Set employeeses, Set jobHistories) {
+	public Job(String jobId, String jobTitle, Integer minSalary, Integer maxSalary, Set employeeses) {
 		this.jobId = jobId;
 		this.jobTitle = jobTitle;
 		this.minSalary = minSalary;
 		this.maxSalary = maxSalary;
-		this.employeeses = employeeses;
-		this.jobHistories = jobHistories;
+		this.employees = employeeses;
 	}
 
 	public String getJobId() {
@@ -76,20 +88,20 @@ public class Job implements java.io.Serializable {
 		this.maxSalary = maxSalary;
 	}
 
-	public Set getEmployeeses() {
-		return this.employeeses;
+	public Set getEmployees() {
+		return this.employees;
 	}
 
-	public void setEmployeeses(Set employeeses) {
-		this.employeeses = employeeses;
+	public void setEmployees(Set employees) {
+		this.employees = employees;
 	}
 
-	public Set getJobHistories() {
-		return this.jobHistories;
-	}
-
-	public void setJobHistories(Set jobHistories) {
-		this.jobHistories = jobHistories;
-	}
+//	public Set getJobHistories() {
+//		return this.jobHistories;
+//	}
+//
+//	public void setJobHistories(Set jobHistories) {
+//		this.jobHistories = jobHistories;
+//	}
 
 }

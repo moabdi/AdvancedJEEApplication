@@ -3,10 +3,14 @@ package com.moabdi.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,21 +18,34 @@ import javax.persistence.Table;
  * @author Mostapha
  *
  */
- @Entity
- @Table(name = "departments")
+@Entity
+@Table(name = "departments")
 public class Department implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="department_id")
 	private int departmentId;
-	private Employee employees;
-	private Location locations;
+	
+	@ManyToOne
+	@JoinColumn(name="manager_id", nullable=false)
+	private Employee employee;
+	
+    @ManyToOne
+    @JoinColumn(name="location_id", nullable=false)
+	private Location location;
+    
+    @Column(name="department_name")
 	private String departmentName;
 
-	private Set employeeses = new HashSet(0);
-	private Set jobHistories = new HashSet(0);
+	@OneToMany(targetEntity=Employee.class, mappedBy="employeeId")
+	private Set employees = new HashSet(0);
+	
+//	@OneToMany(targetEntity = JobHistory.class, mappedBy = "job_history")
+//	private Set jobHistories = new HashSet(0);
 
 	public Department() {
+		
 	}
 
 	public Department(int departmentId, String departmentName) {
@@ -36,62 +53,87 @@ public class Department implements java.io.Serializable {
 		this.departmentName = departmentName;
 	}
 
-	public Department(int departmentId, Employee employees, Location locations, String departmentName, Set employeeses,
-			Set jobHistories) {
-		this.departmentId = departmentId;
-		this.employees = employees;
-		this.locations = locations;
-		this.departmentName = departmentName;
-		this.employeeses = employeeses;
-		this.jobHistories = jobHistories;
-	}
-
+	/**
+	 * @return the departmentId
+	 */
 	public int getDepartmentId() {
-		return this.departmentId;
+		return departmentId;
 	}
 
+	/**
+	 * @param departmentId the departmentId to set
+	 */
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
 
-	public Employee getEmployees() {
-		return this.employees;
+	/**
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
 	}
 
-	public void setEmployees(Employee employees) {
-		this.employees = employees;
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
-	public Location getLocations() {
-		return this.locations;
-	}
-
-	public void setLocations(Location locations) {
-		this.locations = locations;
-	}
-
+	/**
+	 * @return the departmentName
+	 */
 	public String getDepartmentName() {
-		return this.departmentName;
+		return departmentName;
 	}
 
+	/**
+	 * @param departmentName the departmentName to set
+	 */
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
 
-	public Set getEmployeeses() {
-		return this.employeeses;
+	/**
+	 * @return the employees
+	 */
+	public Set getEmployees() {
+		return employees;
 	}
 
-	public void setEmployeeses(Set employeeses) {
-		this.employeeses = employeeses;
+	/**
+	 * @param employees the employees to set
+	 */
+	public void setEmployees(Set employees) {
+		this.employees = employees;
+	}
+	/**
+	 * @return the jobHistories
+	 */
+//	public Set getJobHistories() {
+//		return jobHistories;
+//	}
+
+	/**
+	 * @param jobHistories the jobHistories to set
+	 */
+//	public void setJobHistories(Set jobHistories) {
+//		this.jobHistories = jobHistories;
+//	}
+
+	/**
+	 * @return the employee
+	 */
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public Set getJobHistories() {
-		return this.jobHistories;
-	}
-
-	public void setJobHistories(Set jobHistories) {
-		this.jobHistories = jobHistories;
+	/**
+	 * @param employee the employee to set
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 }
