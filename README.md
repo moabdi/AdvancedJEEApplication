@@ -3,6 +3,7 @@ AdvancedJEEApplication is an jee architecture application based on the latest te
 
 ## Back-end
 For back end part, we use the folowing technologie:
+
 1. Spring boot
 2. Hibernate - JPA
 3. Redis for NoSQL database  
